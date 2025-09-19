@@ -345,17 +345,20 @@
           backdrop-filter: blur(10px);
         }
 
-        .card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(45deg, rgba(0, 234, 255, 0.1), rgba(0, 153, 204, 0.1));
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
+        /* ===== Cards Overlay ===== */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(0, 234, 255, 0.1), rgba(0, 153, 204, 0.1));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none; /* ✅ ensure clicks pass through */
+}
+
 
         .card:hover::before {
           opacity: 1;
@@ -453,17 +456,18 @@
         }
 
         .info-card::before {
-          content: '';
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: conic-gradient(from 0deg, transparent, #00eaff, transparent);
-          animation: rotate 4s linear infinite;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, #00eaff, transparent);
+  animation: rotate 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* ✅ ensure clicks pass through */
+}
 
         .info-card:hover::before {
           opacity: 0.1;
@@ -628,14 +632,6 @@
           .section h2 {
             font-size: 2rem;
           }
-          
-          .card-container {
-            grid-template-columns: 1fr;
-          }
-          
-          .info-grid {
-            grid-template-columns: 1fr;
-          }
         }
     </style>
 </head>
@@ -755,18 +751,20 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section">
+   <section id="projects" class="section">
         <h2>Featured Projects</h2>
         <div class="card-container">
             <div class="card">
                 <h3>Blockchain-based Supply Chain Management System</h3>
                 <p>Built a comprehensive blockchain solution with QR code verification and IPFS storage to enable real-time product tracking, ensuring transparency, authenticity, and fraud reduction in supply chains. Implemented smart contracts for automated verification processes.</p>
                 <p style="margin-top: 20px; color: #00eaff; font-weight: 600;">Blockchain • Smart Contracts • QR Code • IPFS • Supply Chain</p>
+                <a href="https://github.com/Manishadevaraj-07/Product_tracker" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #00eaff; color: #111; text-decoration: none; border-radius: 5px; font-weight: 600; transition: all 0.3s ease;">View on GitHub</a>
             </div>
             <div class="card">
                 <h3>Alumni Connect Platform (In Progress)</h3>
                 <p>Developing a full-stack web platform for alumni–student networking with secure authentication, comprehensive profiles, searchable directories, and event management system using modern web technologies and best practices.</p>
                 <p style="margin-top: 20px; color: #00eaff; font-weight: 600;">React • Node.js • Express.js • MongoDB • JWT Authentication</p>
+                <a href="https://github.com/Kamali-R/alumni-connect" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #00eaff; color: #111; text-decoration: none; border-radius: 5px; font-weight: 600; transition: all 0.3s ease;">View on GitHub</a>
             </div>
         </div>
     </section>
