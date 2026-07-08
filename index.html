@@ -1,939 +1,529 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prithika S - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===== Global Reset ===== */
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: "Poppins", sans-serif;
-        }
-
-        html {
-          scroll-behavior: smooth;
-        }
-
-        body {
-          background: #0a0a0a;
-          color: #f1f1f1;
-          line-height: 1.6;
-          overflow-x: hidden;
-        }
-
-        /* ===== Animated Background ===== */
-        .bg-animation {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: -1;
-          background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
-          background-size: 400% 400%;
-          animation: gradientShift 15s ease infinite;
-        }
-
-        .bg-animation::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(circle at 20% 80%, rgba(0, 234, 255, 0.1) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba(0, 234, 255, 0.08) 0%, transparent 50%),
-                      radial-gradient(circle at 40% 40%, rgba(0, 234, 255, 0.05) 0%, transparent 50%);
-          animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-20px) rotate(1deg); }
-          66% { transform: translateY(10px) rotate(-1deg); }
-        }
-
-        /* ===== Navbar Enhanced ===== */
-        nav {
-          position: fixed;
-          width: 100%;
-          top: 0;
-          left: 0;
-          background: rgba(10, 10, 10, 0.95);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 15px 40px;
-          z-index: 1000;
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(0, 234, 255, 0.2);
-          transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-          background: rgba(10, 10, 10, 0.98);
-          box-shadow: 0 10px 30px rgba(0, 234, 255, 0.1);
-        }
-
-        nav h1 {
-          font-size: 1.8rem;
-          color: #00eaff;
-          font-weight: 700;
-          text-shadow: 0 0 20px #00eaff;
-          position: relative;
-          animation: glow 2s ease-in-out infinite alternate;
-          white-space: nowrap;
-        }
-
-        @keyframes glow {
-          from { text-shadow: 0 0 20px #00eaff, 0 0 30px #00eaff; }
-          to { text-shadow: 0 0 30px #00eaff, 0 0 40px #00eaff, 0 0 50px #00eaff; }
-        }
-
-        nav ul {
-          list-style: none;
-          display: flex;
-          gap: 30px;
-        }
-
-        nav ul li a {
-          color: #f1f1f1;
-          text-decoration: none;
-          font-weight: 500;
-          transition: all 0.3s ease;
-          position: relative;
-          padding: 8px 16px;
-          border-radius: 25px;
-        }
-
-        nav ul li a::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 0;
-          height: 100%;
-          background: linear-gradient(45deg, #00eaff, #0099cc);
-          border-radius: 25px;
-          transition: width 0.3s ease;
-          z-index: -1;
-        }
-
-        nav ul li a:hover::before {
-          width: 100%;
-        }
-
-        nav ul li a:hover {
-          color: #111;
-          transform: translateY(-2px);
-        }
-
-        /* ===== Hero Section Enhanced ===== */
-        .hero {
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          text-align: center;
-          padding: 20px;
-          position: relative;
-        }
-
-        .hero::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(ellipse at center, rgba(0, 234, 255, 0.1) 0%, transparent 70%);
-          animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(1.05); }
-        }
-
-        .hero-content {
-          position: relative;
-          z-index: 2;
-          animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .hero h2 {
-          font-size: 3.5rem;
-          margin-bottom: 20px;
-          color: #00eaff;
-          text-shadow: 0 0 30px #00eaff;
-          animation: typewriter 3s steps(25) 1s both;
-          white-space: nowrap;
-          overflow: hidden;
-          border-right: 3px solid #00eaff;
-        }
-
-        @keyframes typewriter {
-          from { width: 0; }
-          to { width: 100%; }
-        }
-
-        .hero p {
-          max-width: 700px;
-          margin: 0 auto;
-          font-size: 1.3rem;
-          color: #ddd;
-          animation: fadeInUp 1s ease-out 0.5s both;
-          line-height: 1.8;
-        }
-
-        /* ===== Floating Particles ===== */
-        .particles {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-          z-index: 1;
-        }
-
-        .particle {
-          position: absolute;
-          width: 4px;
-          height: 4px;
-          background: #00eaff;
-          border-radius: 50%;
-          animation: floatParticle 15s linear infinite;
-          box-shadow: 0 0 10px #00eaff;
-        }
-
-        @keyframes floatParticle {
-          0% {
-            transform: translateY(100vh) translateX(0);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-100px) translateX(100px);
-            opacity: 0;
-          }
-        }
-
-        /* ===== Sections Enhanced ===== */
-        .section {
-          padding: 100px 60px;
-          text-align: center;
-          position: relative;
-          opacity: 0;
-          transform: translateY(50px);
-          transition: all 0.8s ease;
-        }
-
-        .section.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .section h2 {
-          font-size: 2.5rem;
-          margin-bottom: 50px;
-          color: #00eaff;
-          text-shadow: 0 0 20px #00eaff;
-          position: relative;
-          display: inline-block;
-        }
-
-        .section h2::after {
-          content: '';
-          position: absolute;
-          bottom: -10px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 80px;
-          height: 3px;
-          background: linear-gradient(45deg, #00eaff, #0099cc);
-          border-radius: 2px;
-        }
-
-        /* ===== Skills Enhanced ===== */
-        .skills-container {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 20px;
-          justify-content: center;
-          margin-top: 40px;
-        }
-
-        .skills-container span {
-          padding: 15px 25px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 2px solid #00eaff;
-          color: #00eaff;
-          font-weight: 600;
-          border-radius: 30px;
-          font-size: 1rem;
-          transition: all 0.4s ease;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          position: relative;
-          overflow: hidden;
-          cursor: pointer;
-        }
-
-        .skills-container span::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(45deg, #00eaff, #0099cc);
-          transition: left 0.4s ease;
-          z-index: -1;
-        }
-
-        .skills-container span:hover::before {
-          left: 0;
-        }
-
-        .skills-container span:hover {
-          color: #111;
-          transform: translateY(-5px) scale(1.05);
-          box-shadow: 0 10px 25px rgba(0, 234, 255, 0.4);
-        }
-
-        /* ===== Cards Enhanced ===== */
-        .card-container {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 30px;
-          margin-top: 40px;
-        }
-
-        .card {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 30px;
-          border-radius: 20px;
-          transition: all 0.4s ease;
-          position: relative;
-          overflow: hidden;
-          backdrop-filter: blur(10px);
-        }
-
-        /* ===== Cards Overlay ===== */
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, rgba(0, 234, 255, 0.1), rgba(0, 153, 204, 0.1));
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none; /* ✅ ensure clicks pass through */
-}
-
-
-        .card:hover::before {
-          opacity: 1;
-        }
-
-        .card:hover {
-          transform: translateY(-10px) rotateX(5deg);
-          border-color: #00eaff;
-          box-shadow: 0 20px 40px rgba(0, 234, 255, 0.2);
-        }
-
-        .card h3 {
-          color: #00eaff;
-          margin-bottom: 15px;
-          text-shadow: 0 0 10px #00eaff;
-          font-size: 1.3rem;
-        }
-
-        /* ===== Timeline Enhanced ===== */
-        .timeline {
-          position: relative;
-          margin: 40px 0;
-          padding-left: 40px;
-        }
-
-        .timeline::before {
-          content: '';
-          position: absolute;
-          left: 20px;
-          top: 0;
-          bottom: 0;
-          width: 3px;
-          background: linear-gradient(to bottom, #00eaff, #0099cc);
-          border-radius: 2px;
-        }
-
-        .timeline-item {
-          margin-bottom: 40px;
-          position: relative;
-          background: rgba(255, 255, 255, 0.05);
-          padding: 25px;
-          border-radius: 15px;
-          border-left: 4px solid #00eaff;
-          transition: all 0.3s ease;
-        }
-
-        .timeline-item::before {
-          content: '';
-          position: absolute;
-          left: -42px;
-          top: 30px;
-          width: 12px;
-          height: 12px;
-          background: #00eaff;
-          border-radius: 50%;
-          box-shadow: 0 0 15px #00eaff;
-        }
-
-        .timeline-item:hover {
-          transform: translateX(10px);
-          box-shadow: 0 10px 30px rgba(0, 234, 255, 0.2);
-        }
-
-        .timeline-item h3 {
-          color: #00eaff;
-          margin-bottom: 10px;
-          font-size: 1.2rem;
-        }
-
-        .timeline-item span {
-          display: block;
-          font-size: 0.9rem;
-          color: #aaa;
-          margin-bottom: 10px;
-          font-weight: 500;
-        }
-
-        /* ===== Info Grid Enhanced ===== */
-        .info-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 30px;
-          margin-top: 50px;
-        }
-
-        .info-card {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 25px;
-          border-radius: 20px;
-          text-align: left;
-          transition: all 0.4s ease;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .info-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(from 0deg, transparent, #00eaff, transparent);
-  animation: rotate 4s linear infinite;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* ✅ ensure clicks pass through */
-}
-
-        .info-card:hover::before {
-          opacity: 0.1;
-        }
-
-        @keyframes rotate {
-          100% { transform: rotate(360deg); }
-        }
-
-        .info-card h4 {
-          color: #00eaff;
-          margin-bottom: 20px;
-          font-size: 1.2rem;
-          text-shadow: 0 0 10px #00eaff;
-          position: relative;
-          z-index: 2;
-        }
-
-        .info-card ul {
-          list-style: none;
-          position: relative;
-          z-index: 2;
-        }
-
-        .info-card ul li {
-          margin-bottom: 12px;
-          color: #ddd;
-          transition: all 0.3s ease;
-          padding: 5px 0;
-        }
-
-        .info-card:hover ul li {
-          color: #fff;
-          transform: translateX(5px);
-        }
-
-        /* ===== Contact Enhanced ===== */
-        .contact a {
-          display: inline-block;
-          margin: 15px;
-          padding: 15px 30px;
-          border: 2px solid #00eaff;
-          color: #00eaff;
-          text-decoration: none;
-          border-radius: 30px;
-          font-weight: 600;
-          transition: all 0.4s ease;
-          position: relative;
-          overflow: hidden;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-        }
-
-        .contact a::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(45deg, #00eaff, #0099cc);
-          transition: left 0.4s ease;
-          z-index: -1;
-        }
-
-        .contact a:hover::before {
-          left: 0;
-        }
-
-        .contact a:hover {
-          color: #111;
-          transform: translateY(-3px);
-          box-shadow: 0 15px 30px rgba(0, 234, 255, 0.4);
-        }
-
-        /* ===== Footer Enhanced ===== */
-        footer {
-          text-align: center;
-          padding: 40px;
-          border-top: 1px solid rgba(0, 234, 255, 0.2);
-          margin-top: 60px;
-          color: #777;
-          font-size: 0.9rem;
-          background: rgba(255, 255, 255, 0.02);
-        }
-
-        /* ===== Back to Top Enhanced ===== */
-        #backToTop {
-          position: fixed;
-          bottom: 30px;
-          right: 30px;
-          width: 50px;
-          height: 50px;
-          background: linear-gradient(45deg, #00eaff, #0099cc);
-          color: #111;
-          border: none;
-          border-radius: 50%;
-          font-size: 20px;
-          cursor: pointer;
-          display: none;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
-          z-index: 999;
-          box-shadow: 0 5px 15px rgba(0, 234, 255, 0.3);
-        }
-
-        #backToTop:hover {
-          transform: translateY(-5px) scale(1.1);
-          box-shadow: 0 15px 30px rgba(0, 234, 255, 0.5);
-        }
-
-        /* ===== Loading Animation ===== */
-        .loading {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: #0a0a0a;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 9999;
-          transition: opacity 0.5s ease;
-        }
-
-        .loading-spinner {
-          width: 60px;
-          height: 60px;
-          border: 3px solid rgba(0, 234, 255, 0.3);
-          border-top: 3px solid #00eaff;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-
-        /* ===== Responsive Enhanced ===== */
-        @media (max-width: 768px) {
-          nav {
-            flex-direction: column;
-            padding: 15px 20px;
-          }
-          
-          nav ul {
-            margin-top: 15px;
-            gap: 20px;
-          }
-          
-          .hero h2 {
-            font-size: 2.5rem;
-          }
-          
-          .section {
-            padding: 80px 30px;
-          }
-          
-          .section h2 {
-            font-size: 2rem;
-          }
-        }
-    </style>
+    <title>Prithika S | Portfolio</title>
+    <!-- Meta Descriptions for SEO -->
+    <meta name="description" content="Personal portfolio of Prithika S, a Full-Stack Developer and Hackathon Innovator specializing in web applications, frontend design, and software engineering.">
+    <meta name="keywords" content="Prithika S, Software Developer, Portfolio, B.Tech IT, Bannari Amman Institute of Technology, Blockchain, Frontend, React">
+    <meta name="author" content="Prithika S">
+    <!-- Google Fonts: Poppins (Primary) & Inter (Secondary) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome CSS (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <!-- Loading Screen -->
-    <div class="loading" id="loading">
-        <div class="loading-spinner"></div>
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+        </div>
     </div>
 
-    <!-- Animated Background -->
-    <div class="bg-animation"></div>
+    <!-- Interactive Background Glow & Orbs -->
+    <div class="bg-animation">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
 
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-        <h1>Prithika S</h1>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <!-- Header & Sticky Navbar -->
+    <header>
+        <nav class="navbar" id="navbar">
+            <a href="#home" class="logo" id="nav-logo">Prithika S</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <!-- Theme Toggle Switch -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme" title="Switch Theme">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+                <!-- Download Resume Button -->
+                <a href="https://drive.google.com/file/d/1t5cC_6fQS7tw3rK6wJvSUIUPXMOrw66h/view?usp=sharing" target="_blank" class="btn-resume" id="nav-resume-btn" rel="noopener noreferrer">
+                    <i class="fa-solid fa-download"></i> <span>Resume</span>
+                </a>
+                <!-- Mobile Hamburger Menu Button -->
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h2>Aspiring Software Developer</h2>
-            <p>Dedicated IT engineering student with strong skills in programming, problem-solving, and emerging technologies. Passionate about machine learning and campus safety innovations, eager to apply my knowledge in real-world scenarios.</p>
+        <div class="hero-grid">
+            <div class="hero-content scroll-animate animated">
+                <span class="hero-greeting">Welcome to my space</span>
+                <h1 class="hero-title">I'm <span class="name-gradient">Prithika S</span></h1>
+                <p class="hero-subtitle">B.Tech Information Technology Student</p>
+                <p class="hero-desc">
+                    Dedicated IT engineering student with strong skills in programming, problem-solving, and emerging technologies. Passionate about web development, machine learning, and blockchain innovations. Eager to build elegant, high-performance solutions for real-world challenges.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary" id="hero-projects-btn">
+                        <span>View Projects</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary" id="hero-contact-btn">
+                        <span>Contact Me</span> <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual scroll-animate animated">
+                <div class="hero-blob-wrapper">
+                    <div class="hero-blob">
+                        <img src="https://lh3.googleusercontent.com/d/1w0iTeN4bkKHmqwrIWsrkMPewe2bswxpL" alt="Prithika S" class="hero-profile-img">
+                    </div>
+                    <div class="hero-ring-1"></div>
+                    <div class="hero-ring-2"></div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
-        <h2>Profile</h2>
-        <div class="info-grid">
-            <div class="info-card">
-                <h4>Contact Information</h4>
-                <ul>
-                    <li>📱 8098506554</li>
-                    <li>📧 prithikaselvakumar123@gmail.com</li>
-                    <li>📍 Dharapuram, Tamil Nadu</li>
-                </ul>
+    <section id="about" class="section scroll-animate">
+        <div class="section-header">
+            <h2>Profile Overview</h2>
+            <p>A look into who I am, my core interest areas, and key personal qualities.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-summary-card">
+                <h3><i class="fa-solid fa-user-tie"></i> Professional Summary</h3>
+                <p>
+                    Currently pursuing a Bachelor of Technology in Information Technology at Bannari Amman Institute of Technology. I am driven by a curiosity to learn and apply technology to improve systems. My technical interests span frontend web engineering, decentralization, smart contracts, and building campus safety and rescue solutions.
+                </p>
+                <div class="about-highlights">
+                    <div class="highlight-item">
+                        <h4>8.11</h4>
+                        <p>Current CGPA</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h4>2027</h4>
+                        <p>Graduation Year</p>
+                    </div>
+                </div>
             </div>
-            <div class="info-card">
-                <h4>Languages</h4>
-                <ul>
-                    <li>Tamil (Read, Write, Speak)</li>
-                    <li>English (Read, Write, Speak)</li>
-                </ul>
-            </div>
-            <div class="info-card">
-                <h4>Personal Skills</h4>
-                <ul>
-                    <li>Time Management</li>
-                    <li>Team Work & Collaboration</li>
-                    <li>Critical Thinking</li>
-                    <li>Leadership Skills</li>
-                </ul>
-            </div>
-            <div class="info-card">
-                <h4>Areas of Interest</h4>
-                <ul>
-                    <li>Blockchain Technology</li>
-                    <li>Frontend Development</li>
-                    <li>Data Structures and Algorithms</li>
-                </ul>
+            <div class="about-info-cards">
+                <div class="info-grid-card">
+                    <h4><i class="fa-solid fa-address-card"></i> Contact</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-phone"></i> <span>+91 8098506554</span></li>
+                        <li><i class="fa-solid fa-envelope"></i> <span style="word-break: break-all;">prithikaselvakumar123@gmail.com</span></li>
+                        <li><i class="fa-solid fa-location-dot"></i> <span>Dharapuram, Tamil Nadu</span></li>
+                    </ul>
+                </div>
+                <div class="info-grid-card">
+                    <h4><i class="fa-solid fa-language"></i> Languages</h4>
+                    <ul>
+                        <li><span class="label">Tamil</span> <span>Read, Write, Speak</span></li>
+                        <li><span class="label">English</span> <span>Read, Write, Speak</span></li>
+                    </ul>
+                </div>
+                <div class="info-grid-card">
+                    <h4><i class="fa-solid fa-star"></i> Personal Skills</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Time Management</li>
+                        <li><i class="fa-solid fa-check"></i> Teamwork &amp; Collaboration</li>
+                        <li><i class="fa-solid fa-check"></i> Critical Thinking</li>
+                        <li><i class="fa-solid fa-check"></i> Leadership Qualities</li>
+                    </ul>
+                </div>
+                <div class="info-grid-card">
+                    <h4><i class="fa-solid fa-heart"></i> Areas of Interest</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-cubes"></i> Blockchain Technology</li>
+                        <li><i class="fa-solid fa-laptop-code"></i> Frontend Development</li>
+                        <li><i class="fa-solid fa-gears"></i> Data Structures &amp; Algorithms</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
-        <h2>Technical Skills</h2>
-        <h3 style="color: #00eaff; margin-bottom: 25px; font-size: 1.3rem;">Programming Languages</h3>
-        <div class="skills-container">
-            <span>C</span>
-            <span>Python</span>
-            <span>Java</span>
+    <section id="skills" class="section scroll-animate">
+        <div class="section-header">
+            <h2>Technical Skills</h2>
+            <p>Core languages, frameworks, tools, and subjects I work with.</p>
         </div>
-        <h3 style="color: #00eaff; margin: 50px 0 25px 0; font-size: 1.3rem;">Web Technologies</h3>
-        <div class="skills-container">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>React</span>
-            <span>Node.js</span>
-            <span>Express.js</span>
+        <div class="skills-grid">
+            <!-- Programming Languages -->
+            <div class="skills-category-card">
+                <h3><i class="fa-solid fa-code"></i> Programming</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag"><i class="fa-solid fa-terminal"></i> C Language</span>
+                    <span class="skill-tag"><i class="fa-brands fa-python"></i> Python</span>
+                    <span class="skill-tag"><i class="fa-brands fa-java"></i> Java</span>
+                </div>
+            </div>
+            <!-- Web Technologies -->
+            <div class="skills-category-card">
+                <h3><i class="fa-solid fa-globe"></i> Web Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+                    <span class="skill-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+                    <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+                    <span class="skill-tag"><i class="fa-brands fa-react"></i> React.js</span>
+                    <span class="skill-tag"><i class="fa-brands fa-node-js"></i> Node.js</span>
+                </div>
+            </div>
+            <!-- Tools & Technologies -->
+            <div class="skills-category-card">
+                <h3><i class="fa-solid fa-screwdriver-wrench"></i> Tools &amp; Technologies</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag"><i class="fa-brands fa-git-alt"></i> Git &amp; GitHub</span>
+                    <span class="skill-tag"><i class="fa-solid fa-database"></i> MongoDB</span>
+                    <span class="skill-tag"><i class="fa-brands fa-figma"></i> Figma</span>
+                    <span class="skill-tag"><i class="fa-solid fa-paper-plane"></i> Postman</span>
+                </div>
+            </div>
+            <!-- Core Subjects -->
+            <div class="skills-category-card">
+                <h3><i class="fa-solid fa-book"></i> Core Subjects</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag"><i class="fa-solid fa-sitemap"></i> Data Structures &amp; Algorithms</span>
+                    <span class="skill-tag"><i class="fa-solid fa-cubes"></i> Object Oriented Programming</span>
+                    <span class="skill-tag"><i class="fa-solid fa-link"></i> Smart Contracts &amp; Blockchain</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="section">
-        <h2>Education</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <h3>B.Tech Information Technology</h3>
-                <span>Bannari Amman Institute of Technology • 2023-2027</span>
-                <p>CGPA: 8.11 - Currently pursuing degree with focus on modern software development practices and emerging technologies.</p>
+    <!-- Experience & Education Section -->
+    <section id="experience" class="section scroll-animate">
+        <div class="section-header">
+            <h2>Experience &amp; Education</h2>
+            <p>A chronological overview of my academic milestones and professional experience.</p>
+        </div>
+        <div class="experience-grid unified-timeline-grid">
+            <div class="timeline-intro-column">
+                <span class="timeline-pretitle">Timeline</span>
+                <h3>Academic &amp; Professional Milestones</h3>
+                <p class="timeline-intro-text">
+                    A record of my education and hands-on professional experiences, charting my growth as a developer.
+                </p>
+                <div class="timeline-legend">
+                    <span class="legend-item"><i class="fa-solid fa-graduation-cap"></i> Education</span>
+                    <span class="legend-item"><i class="fa-solid fa-briefcase"></i> Experience</span>
+                </div>
             </div>
-            <div class="timeline-item">
-                <h3>Higher Secondary Certificate (HSC)</h3>
-                <span>Thenmalar Higher Secondary School • 2020-2021</span>
-                <p>Percentage: 93.5% - Excelled in mathematics and computer science subjects, laying strong foundation for technical education.</p>
-            </div>
-            <div class="timeline-item">
-                <h3>Secondary School Leaving Certificate (SSLC)</h3>
-                <span>2022-2023</span>
-                <p>Percentage: 100% - Achieved perfect score demonstrating exceptional academic performance and dedication.</p>
+            
+            <div class="timeline-content-column">
+                <div class="timeline-wrapper">
+                    <!-- College (B.Tech IT) -->
+                    <div class="timeline-card edu-card">
+                        <span class="timeline-date">2023 - 2027</span>
+                        <span class="timeline-tag edu"><i class="fa-solid fa-graduation-cap"></i> Education</span>
+                        <h4>B.Tech Information Technology</h4>
+                        <div class="timeline-subtitle">Bannari Amman Institute of Technology</div>
+                        <p><strong>CGPA: 8.11</strong> - Actively pursuing degree with focus on software engineering, data structures, and emerging web standards.</p>
+                    </div>
+
+                    <!-- Frontend Development Intern -->
+                    <div class="timeline-card exp-card">
+                        <span class="timeline-date">Aug 2025 - Oct 2025</span>
+                        <span class="timeline-tag exp"><i class="fa-solid fa-briefcase"></i> Experience</span>
+                        <h4>Frontend Development Intern</h4>
+                        <div class="timeline-subtitle">AICTE – Edunet Foundation – IBM SkillsBuild</div>
+                        <p>Constructed responsive UI templates with HTML, CSS, JavaScript, and React. Gained insights into collaborative workflows, code versioning through Git/GitHub, and modern client-side performance principles during the 6-week program.</p>
+                    </div>
+
+                    <!-- HSC -->
+                    <div class="timeline-card edu-card">
+                        <span class="timeline-date">2021 - 2023</span>
+                        <span class="timeline-tag edu"><i class="fa-solid fa-graduation-cap"></i> Education</span>
+                        <h4>Higher Secondary Certificate (HSC)</h4>
+                        <div class="timeline-subtitle">Thenmalar Higher Secondary School</div>
+                        <p><strong>Percentage: 93.5%</strong> - Focused heavily on Computer Science and Mathematics, building a strong base for tech studies.</p>
+                    </div>
+
+                    <!-- SSLC -->
+                    <div class="timeline-card edu-card">
+                        <span class="timeline-date">2020 - 2021</span>
+                        <span class="timeline-tag edu"><i class="fa-solid fa-graduation-cap"></i> Education</span>
+                        <h4>Secondary School Leaving Certificate (SSLC)</h4>
+                        <div class="timeline-subtitle">State Board</div>
+                        <p><strong>Percentage: 100%</strong> - Achieved perfect score, showcasing consistent dedication and scholastic diligence.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-   <section id="projects" class="section">
-        <h2>Featured Projects</h2>
-        <div class="card-container">
-            <div class="card">
-                <h3>Blockchain-based Supply Chain Management System</h3>
-                <p>Built a comprehensive blockchain solution with QR code verification and IPFS storage to enable real-time product tracking, ensuring transparency, authenticity, and fraud reduction in supply chains. Implemented smart contracts for automated verification processes.</p>
-                <p style="margin-top: 20px; color: #00eaff; font-weight: 600;">Blockchain • Smart Contracts • QR Code • IPFS • Supply Chain</p>
-                <a href="https://github.com/Manishadevaraj-07/Product_tracker" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #00eaff; color: #111; text-decoration: none; border-radius: 5px; font-weight: 600; transition: all 0.3s ease;">View on GitHub</a>
+    <section id="projects" class="section scroll-animate">
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+            <p>Innovative creations spanning frontend systems, secure decentralized nodes, and web platforms.</p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Key Project (Alumni Connect Platform) - Highlighted -->
+            <div class="project-card featured-project" data-categories="web">
+                <span class="project-badge-featured"><i class="fa-solid fa-star"></i> Key Project</span>
+                <div class="project-icon">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3>Alumni Connect Platform</h3>
+                <p>
+                    A full-stack communication portal for student-alumni networking. Supports secure JWT authentication, rich user profile settings, searchable directories, direct messaging channels, and a built-in event manager for hosting community meetups. (In Progress)
+                </p>
+                <div class="project-tags">
+                    <span class="project-tag">React</span>
+                    <span class="project-tag">Node.js</span>
+                    <span class="project-tag">Express.js</span>
+                    <span class="project-tag">MongoDB</span>
+                    <span class="project-tag">JWT</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Kamali-R/alumni-connect" target="_blank" class="project-link" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                </div>
             </div>
-            <div class="card">
-                <h3>Alumni Connect Platform (In Progress)</h3>
-                <p>Developing a full-stack web platform for alumni–student networking with secure authentication, comprehensive profiles, searchable directories, and event management system using modern web technologies and best practices.</p>
-                <p style="margin-top: 20px; color: #00eaff; font-weight: 600;">React • Node.js • Express.js • MongoDB • JWT Authentication</p>
-                <a href="https://github.com/Kamali-R/alumni-connect" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #00eaff; color: #111; text-decoration: none; border-radius: 5px; font-weight: 600; transition: all 0.3s ease;">View on GitHub</a>
+
+            <!-- Smart Digital Learning Platform -->
+            <div class="project-card" data-categories="web">
+                <div class="project-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3>Smart Digital Learning Platform</h3>
+                <p>
+                    An interactive, web-based digital learning application designed to enhance student engagement. Features rich course curation tools, progress tracking analytics, interactive assessments, and real-time student-teacher collaboration portals.
+                </p>
+                <div class="project-tags">
+                    <span class="project-tag">React.js</span>
+                    <span class="project-tag">Node.js</span>
+                    <span class="project-tag">Express.js</span>
+                    <span class="project-tag">MongoDB</span>
+                    <span class="project-tag">WebSockets</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/PRITHIKASELVAKUMAR/intelligent-grow-hub" target="_blank" class="project-link" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-        <h2>Experience & Achievements</h2>
-        <div class="card-container">
-            <div class="card">
-                <h3>Frontend Development Intern (Ongoing)</h3>
-                <span style="color: #aaa; font-size: 0.9rem; display: block; margin-bottom: 15px;">AICTE – Edunet Foundation–IBM SkillsBuild | Aug 2025–Oct 2025 (6 weeks)</span>
-                <p>Working on developing responsive web interfaces using HTML, CSS, JavaScript, and React. Collaborating on UI/UX improvements and gaining hands-on experience with frontend best practices, version control with Git, and modern development workflows.</p>
+    <!-- Achievements & Certifications Grid -->
+    <section id="achievements" class="section scroll-animate">
+        <div class="section-header">
+            <h2>Achievements &amp; Certifications</h2>
+            <p>Hackathons, competitions, and certifications that define my learning journey.</p>
+        </div>
+
+        <!-- Hackathons & Achievements Sub-heading -->
+        <h3 class="subsection-title"><i class="fa-solid fa-trophy"></i> Hackathons &amp; Competitions</h3>
+        <div class="achievements-grid">
+            <!-- Samartha 2025 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fa-solid fa-medal"></i>
+                </div>
+                <div class="achievement-info">
+                    <h4>Samartha 2025 — National Hackathon Finalist</h4>
+                    <p>Secured a <strong>finalist position</strong> at Samartha 2025, a prestigious national-level hackathon, competing among top teams across India.</p>
+                    <a href="https://drive.google.com/file/d/1F7tpBiwEiX6nvQUrMs9B-jLIonEITNFH/view?usp=drive_link" target="_blank" class="cert-link-btn" rel="noopener noreferrer">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                    </a>
+                </div>
             </div>
-            <div class="card">
-                <h3>Ideathon-2024 Paper Presentation</h3>
-                <p>Successfully participated in Ideathon-2024 paper presentation, showcasing innovative ideas and research findings in technology and software development. Demonstrated presentation skills and technical knowledge to industry experts.</p>
+            <!-- Intellecthon 2k25 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <div class="achievement-info">
+                    <h4>Intellecthon 2k25 — National Software Innovation Hackathon</h4>
+                    <p>Participated in <strong>Intellecthon 2k25</strong>, a National Level Software Innovation Hackathon, showcasing creative engineering and solution-building abilities.</p>
+                    <a href="https://drive.google.com/file/d/1ZN_KbLJ_HLYfDO5J1gC6K2hUl2CUVlqc/view?usp=drive_link" target="_blank" class="cert-link-btn" rel="noopener noreferrer">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                    </a>
+                </div>
             </div>
-            <div class="card">
-                <h3>International Conference on Intelligent System in Smart Healthcare 2024</h3>
-                <p>Participated in the International Conference on Intelligent System in Smart Healthcare 2024, gaining valuable insights into cutting-edge healthcare technologies, AI applications, and emerging trends in digital health solutions.</p>
+            <!-- Guidewire DEVTrails 2026 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <div class="achievement-info">
+                    <h4>Guidewire DEVTrails University Hackathon 2026</h4>
+                    <p>Participating in the <strong>Guidewire DEVTrails University Hackathon 2026</strong>, an industry-backed coding challenge for university students worldwide.</p>
+                    <a href="https://drive.google.com/file/d/1m8FhDJrrzhDmdGQwAHig3f7csNimJ4Uh/view?usp=drive_link" target="_blank" class="cert-link-btn" rel="noopener noreferrer">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                    </a>
+                </div>
+            </div>
+            <!-- HACKATRON – Infotsav'25 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="achievement-info">
+                    <h4>HACKATRON — Infotsav'25</h4>
+                    <p>Participated in <strong>HACKATRON</strong> at Infotsav'25, a competitive hackathon fostering rapid innovation and cross-disciplinary problem solving.</p>
+                    <a href="https://drive.google.com/file/d/1Zlf__nYjK3SXNtCgXpnsIeKsFnDNJsha/view?usp=drive_link" target="_blank" class="cert-link-btn" rel="noopener noreferrer">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Certifications Sub-heading -->
+        <h3 class="subsection-title" style="margin-top: 55px;"><i class="fa-solid fa-certificate"></i> Certifications</h3>
+        <div class="achievements-grid">
+            <!-- IBM Web Dev Fundamentals -->
+            <div class="achievement-card cert-card">
+                <div class="achievement-icon cert-icon">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <div class="achievement-info">
+                    <h4>Web Development Fundamentals</h4>
+                    <p class="cert-issuer"><i class="fa-solid fa-building"></i> IBM SkillsBuild</p>
+                    <p class="cert-date"><i class="fa-regular fa-calendar"></i> Issued: September 24, 2025</p>
+                    <p>Awarded to <strong>Prithika S</strong> for successfully completing Web Development Fundamentals on the IBM SkillsBuild platform.</p>
+                    <a href="https://drive.google.com/file/d/1ZlvM1JAaJOYgbv-HW_-bzxpV-lVMxgAB/view?usp=drive_link" target="_blank" class="cert-link-btn" rel="noopener noreferrer">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                    </a>
+                </div>
+            </div>
+            <!-- Cisco Networking Basics -->
+            <div class="achievement-card cert-card">
+                <div class="achievement-icon cert-icon">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <div class="achievement-info">
+                    <h4>Networking Basics</h4>
+                    <p class="cert-issuer"><i class="fa-solid fa-building"></i> Cisco Networking Academy &amp; Bannari Amman Institute of Technology</p>
+                    <p>Awarded to <strong>Prithika S</strong> for successfully completing <strong>Networking Basics</strong>, offered by Bannari Amman Institute of Technology through the Cisco Networking Academy program.</p>
+                    <a href="https://drive.google.com/file/d/17XuvsIZiCYz5fNqB2CjbSwWMriYkK-ia/view?usp=drive_link" target="_blank" class="cert-link-btn" rel="noopener noreferrer">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                    </a>
+                </div>
             </div>
         </div>
     </section>
+
 
     <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <h2>Connect With Me</h2>
-        <p style="margin-bottom: 40px; color: #ddd; font-size: 1.1rem;">Let's connect and explore opportunities together!</p>
-        <a href="mailto:prithikaselvakumar123@gmail.com" target="_blank" rel="noopener noreferrer">Email Me</a>
-        <a href="http://www.linkedin.com/in/prithika-s-5847a9290" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/PRITHIKASELVAKUMAR" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://leetcode.com/u/preethi2910/" target="_blank" rel="noopener noreferrer">LeetCode</a>
-        <a href="https://www.hackerrank.com/profile/prithikaselvaku1" target="_blank" rel="noopener noreferrer">HackerRank</a>
-        <a href="tel:+918098506554">Call Me</a>
+    <section id="contact" class="section scroll-animate">
+        <div class="section-header">
+            <h2>Connect With Me</h2>
+            <p>Have an inquiry, opportunity, or feedback? Drop a message or reach out via direct channels!</p>
+        </div>
+        <div class="contact-grid">
+            <!-- Contact details panel -->
+            <div class="contact-info-panel">
+                <div class="contact-card">
+                    <h3>Contact Information</h3>
+                    <div class="contact-details">
+                        <!-- Phone -->
+                        <div class="contact-method">
+                            <div class="contact-method-icon">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="contact-method-text">
+                                <h5>Call Me</h5>
+                                <a href="tel:+918098506554">+91 8098506554</a>
+                            </div>
+                        </div>
+                        <!-- Email -->
+                        <div class="contact-method">
+                            <div class="contact-method-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="contact-method-text">
+                                <h5>Email Me</h5>
+                                <a href="mailto:prithikaselvakumar123@gmail.com">prithikaselvakumar123@gmail.com</a>
+                            </div>
+                        </div>
+                        <!-- Location -->
+                        <div class="contact-method">
+                            <div class="contact-method-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="contact-method-text">
+                                <h5>Location</h5>
+                                <p>Dharapuram, Tamil Nadu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Handles -->
+                <div class="socials-card">
+                    <h4>Direct Professional Handles</h4>
+                    <div class="social-links">
+                        <a href="http://www.linkedin.com/in/prithika-s-5847a9290" target="_blank" class="social-btn" aria-label="LinkedIn" rel="noopener noreferrer">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/PRITHIKASELVAKUMAR" target="_blank" class="social-btn" aria-label="GitHub" rel="noopener noreferrer">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://leetcode.com/u/preethi2910/" target="_blank" class="social-btn" aria-label="LeetCode" rel="noopener noreferrer">
+                            <i class="fa-solid fa-code"></i>
+                        </a>
+                        <a href="https://www.hackerrank.com/profile/prithikaselvaku1" target="_blank" class="social-btn" aria-label="HackerRank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-hackerrank"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive contact form -->
+            <div class="contact-form-panel">
+                <form id="contact-form" class="contact-form">
+                    <div id="form-status" class="form-status"></div>
+                    <div class="form-group">
+                        <label for="form-name">Full Name</label>
+                        <input type="text" id="form-name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-email">Email Address</label>
+                        <input type="email" id="form-email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-message">Your Message</label>
+                        <textarea id="form-message" class="form-control" placeholder="Type your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; border: none;">
+                        <span>Send Message</span> <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Prithika S. All rights reserved. Aspiring to make a difference through technology 💻✨</p>
+        <p class="footer-logo">Prithika S | Portfolio</p>
+        <p>&copy; 2026 Prithika S. All rights reserved. Aspiring to make a difference through technology 💻✨</p>
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" onclick="scrollToTop()">↑</button>
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
 
-    <script>
-        // Loading screen
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('loading').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loading').style.display = 'none';
-                }, 500);
-            }, 1500);
-        });
-
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const backToTop = document.getElementById('backToTop');
-            
-            if (window.pageYOffset > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-
-            if (window.pageYOffset > 300) {
-                backToTop.style.display = 'flex';
-            } else {
-                backToTop.style.display = 'none';
-            }
-        });
-
-        // Smooth scroll to top
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Active navigation highlighting
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('nav a[href^="#"]');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 150;
-                if (window.pageYOffset >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.style.color = '#f1f1f1';
-                if (link.getAttribute('href') === '#' + current) {
-                    link.style.color = '#00eaff';
-                }
-            });
-        });
-
-        // Initialize particles
-        createParticles();
-
-        // Add stagger animation to skills
-        document.querySelectorAll('.skills-container').forEach(container => {
-            const skills = container.querySelectorAll('span');
-            skills.forEach((skill, index) => {
-                skill.style.animationDelay = (index * 0.1) + 's';
-                skill.style.animation = 'fadeInUp 0.6s ease-out both';
-            });
-        });
-
-        // Add hover sound effect simulation
-        document.querySelectorAll('.card, .skills-container span, .contact a').forEach(element => {
-            element.addEventListener('mouseenter', function() {
-                this.style.transform += ' scale(1.02)';
-            });
-            element.addEventListener('mouseleave', function() {
-                this.style.transform = this.style.transform.replace(' scale(1.02)', '');
-            });
-        });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9816fa03f13a7e84',t:'MTc1ODI2MjgyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <!-- Custom Script File -->
+    <script src="script.js"></script>
+</body>
 </html>
